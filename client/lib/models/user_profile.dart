@@ -15,11 +15,11 @@ class UserProfile {
 
   factory UserProfile.fromJson(Map<String, dynamic> json) {
     return UserProfile(
-      id: json['id'],
+      id: int.parse(json['id']),
       username: json['username'],
       email: json['email'],
-      firstName: json['email'],
-      lastName: json['last_name'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
     );
   }
 
