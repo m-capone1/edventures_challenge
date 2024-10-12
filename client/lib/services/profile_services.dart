@@ -14,7 +14,7 @@ class ProfileService {
           .map((profile) => UserProfile.fromJson(profile))
           .toList();
     } else {
-      throw Exception('Failed to load profiles');
+      throw Exception('Unable to load profiles');
     }
   }
 
@@ -25,7 +25,7 @@ class ProfileService {
       body: jsonEncode(profile.toJson()),
     );
     if (response.statusCode != 201) {
-      throw Exception('Failed to create profile');
+      throw Exception('Unable to create profile');
     }
   }
 
@@ -36,14 +36,14 @@ class ProfileService {
       body: jsonEncode(profile.toJson()),
     );
     if (response.statusCode != 200) {
-      throw Exception('Failed to update profile');
+      throw Exception('Unable to update profile');
     }
   }
 
   Future<void> deleteProfile(int id) async {
     final response = await http.delete(Uri.parse('$url/UserPofiles/$id/'));
     if (response.statusCode != 204) {
-      throw Exception('Failed to delete profile');
+      throw Exception('Unable to delete profile');
     }
   }
 }

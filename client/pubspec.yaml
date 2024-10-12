@@ -13,12 +13,12 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_bloc: ^8.0.0
-  http: ^1.2.2
   json_serializable: ^6.1.0
   provider: ^6.0.0
 
