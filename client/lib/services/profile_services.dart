@@ -3,10 +3,10 @@ import 'package:http/http.dart' as http;
 import '../models/user_profile.dart';
 
 class ProfileService {
-  final String url = "http://your-django-backend-url.com/api";
+  final String url = "https://6709e832af1a3998baa2939b.mockapi.io";
 
   Future<List<UserProfile>> fetchProfiles() async {
-    final response = await http.get(Uri.parse('$url/profiles/'));
+    final response = await http.get(Uri.parse('$url/UserPofiles/'));
 
     if (response.statusCode == 200) {
       List<dynamic> jsonResponse = jsonDecode(response.body);
@@ -20,7 +20,7 @@ class ProfileService {
 
   Future<void> createProfile(UserProfile profile) async {
     final response = await http.post(
-      Uri.parse('$url/profiles/'),
+      Uri.parse('$url/UserPofiles/'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(profile.toJson()),
     );
@@ -31,7 +31,7 @@ class ProfileService {
 
   Future<void> updateProfile(UserProfile profile) async {
     final response = await http.put(
-      Uri.parse('$url/profiles/${profile.id}/'),
+      Uri.parse('$url/UserPofiles/${profile.id}/'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(profile.toJson()),
     );
@@ -41,7 +41,7 @@ class ProfileService {
   }
 
   Future<void> deleteProfile(int id) async {
-    final response = await http.delete(Uri.parse('$url/profiles/$id/'));
+    final response = await http.delete(Uri.parse('$url/UserPofiles/$id/'));
     if (response.statusCode != 204) {
       throw Exception('Failed to delete profile');
     }
