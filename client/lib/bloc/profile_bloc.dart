@@ -36,6 +36,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     });
 
     on<DeleteProfile>((event, emit) async {
+      emit(ProfileLoading());
       try {
         await profileService.deleteProfile(event.profileId);
         add(LoadProfiles());

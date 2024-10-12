@@ -41,8 +41,10 @@ class ProfileService {
   }
 
   Future<void> deleteProfile(int id) async {
-    final response = await http.delete(Uri.parse('$url/UserPofiles/$id/'));
-    if (response.statusCode != 204) {
+    final response =
+        await http.delete(Uri.parse('$url/UserPofiles/${id.toString()}/'));
+
+    if (response.statusCode != 200 && response.statusCode != 204) {
       throw Exception('Unable to delete profile');
     }
   }

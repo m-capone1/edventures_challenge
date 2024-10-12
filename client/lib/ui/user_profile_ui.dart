@@ -49,8 +49,9 @@ class ProfileListView extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.delete),
                       onPressed: () {
+                        final profileId = profile.id;
                         BlocProvider.of<ProfileBloc>(context)
-                            .add(DeleteProfile(profile.id));
+                            .add(DeleteProfile(profileId));
                       },
                     ),
                   ],
