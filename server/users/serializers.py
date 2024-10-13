@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 
 class UserProfileCreateSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', required=True)
-    first_name = serializers.CharField(required=True)
-    last_name = serializers.CharField(required=True)
+    firstName = serializers.CharField(required=True)
+    lastName = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
 
     class Meta:
         model = UserProfile
-        fields = ['id', 'username', 'first_name', 'last_name', 'email']
+        fields = ['id', 'username', 'firstName', 'lastName', 'email']
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
@@ -18,8 +18,8 @@ class UserProfileCreateSerializer(serializers.ModelSerializer):
 
         user_profile = UserProfile.objects.create(
             user=user,
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
+            firstName=validated_data['firstName'],
+            lastName=validated_data['lastName'],
             email=validated_data['email']
         )
         return user_profile
@@ -32,8 +32,8 @@ class UserProfileCreateSerializer(serializers.ModelSerializer):
             user.username = user_data.get('username', user.username)
             user.save()
 
-        instance.first_name = validated_data.get('first_name', instance.first_name)
-        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.firstName = validated_data.get('firstName', instance.firstName)
+        instance.lastName = validated_data.get('lastName', instance.lastName)
         instance.email = validated_data.get('email', instance.email)
         instance.save()
 
