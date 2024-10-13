@@ -5,3 +5,7 @@ from .serializers import UserProfileCreateSerializer
 class UserProfileListCreate(generics.ListCreateAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileCreateSerializer
+
+class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileCreateSerializer

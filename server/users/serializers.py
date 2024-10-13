@@ -10,11 +10,11 @@ class UserProfileCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ['username', 'first_name', 'last_name', 'email']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email']
 
     def create(self, validated_data):
-        username = validated_data.pop('user')['username']
-        user = User.objects.create(username=username)
+        user_data = validated_data.pop('user')
+        user = User.objects.create(username=user_data['username'])
 
         user_profile = UserProfile.objects.create(
             user=user,
@@ -23,3 +23,18 @@ class UserProfileCreateSerializer(serializers.ModelSerializer):
             email=validated_data['email']
         )
         return user_profile
+    
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop('user', None)
+
+        if user_data:
+            user = instance.user
+            user.username = user_data.get('username', user.username)
+            user.save()
+
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.email = validated_data.get('email', instance.email)
+        instance.save()
+
+        return instance
