@@ -28,8 +28,8 @@ class UserProfile {
       'id': id,
       'username': username,
       'email': email,
-      'first_name': firstName,
-      'last_name': lastName,
+      'firstName': firstName,
+      'lastName': lastName,
     };
   }
 }

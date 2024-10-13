@@ -37,6 +37,7 @@ class ProfileService {
       body: jsonEncode(profile.toJson()),
     );
     if (response.statusCode != 200) {
+      print('Response Body: ${response.body}');
       throw Exception('Unable to update profile');
     }
   }
