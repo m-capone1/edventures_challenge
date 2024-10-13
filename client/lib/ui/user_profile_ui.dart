@@ -4,6 +4,7 @@ import '../bloc/profile_bloc.dart';
 import '../bloc/profile_event.dart';
 import '../bloc/profile_state.dart';
 import '../services/profile_services.dart';
+import './create_profile_form.dart';
 
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});
@@ -15,6 +16,15 @@ class UserProfileScreen extends StatelessWidget {
       body: BlocProvider(
         create: (context) => ProfileBloc(ProfileService())..add(LoadProfiles()),
         child: const ProfileListView(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CreateProfileForm()),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -43,7 +53,7 @@ class ProfileListView extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.edit),
                       onPressed: () {
-                        // Implement edit
+                        // Implement edit functionality here
                       },
                     ),
                     IconButton(
