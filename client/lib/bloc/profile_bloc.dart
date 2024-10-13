@@ -20,8 +20,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<CreateProfile>((event, emit) async {
       if (state is ProfileLoaded) {
         try {
+          emit(ProfileLoading());
           await profileService.createProfile(event.profile);
-
           add(LoadProfiles());
         } catch (e) {
           emit(ProfileError(e.toString()));
@@ -31,6 +31,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     on<UpdateProfile>((event, emit) async {
       try {
+        emit(ProfileLoading());
         await profileService.updateProfile(event.profile);
         add(LoadProfiles());
       } catch (e) {

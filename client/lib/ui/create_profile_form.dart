@@ -29,8 +29,6 @@ class CreateProfileFormState extends State<CreateProfileForm> {
 
   @override
   Widget build(BuildContext context) {
-    final profileBloc = BlocProvider.of<ProfileBloc>(context);
-
     return Scaffold(
       appBar: AppBar(title: const Text('Create Profile')),
       body: Padding(
@@ -91,7 +89,8 @@ class CreateProfileFormState extends State<CreateProfileForm> {
                       lastName: _lastNameController.text,
                     );
 
-                    profileBloc.add(CreateProfile(newProfile));
+                    BlocProvider.of<ProfileBloc>(context)
+                        .add(CreateProfile(newProfile));
 
                     Navigator.pop(context);
                   }

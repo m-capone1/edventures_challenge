@@ -24,6 +24,7 @@ class ProfileService {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(profile.toJson()),
     );
+
     if (response.statusCode != 201) {
       throw Exception('Unable to create profile');
     }
