@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from .models import ChatMessage
 
-class ChatMessageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ChatMessage
-        fields = ['message', 'response']
+class ChatMessageSerializer(serializers.Serializer):
+    message = serializers.CharField(max_length=500)
+    response = serializers.CharField(max_length=500)
