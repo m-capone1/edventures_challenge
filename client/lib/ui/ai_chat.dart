@@ -73,7 +73,6 @@ class AiChatState extends State<AiChat> {
                           controller: _controller,
                           onSubmitted: (value) {
                             if (value.isNotEmpty) {
-                              logger.i('Updated Profile: $value');
                               BlocProvider.of<ChatBloc>(context)
                                   .add(SendMessage(value));
                               _controller.clear();
