@@ -11,8 +11,6 @@ ALLOWED_HOSTS = [
     'edventures-challenge.onrender.com'
 ]
 
-
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,6 +34,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://edventures-challenge.onrender.com",
 ]
 
 ROOT_URLCONF = 'server.urls'
