@@ -5,8 +5,15 @@ import '../bloc/chat_event.dart';
 import '../bloc/chat_state.dart';
 import '../services/chat_services.dart';
 
-class AiChat extends StatelessWidget {
+class AiChat extends StatefulWidget {
   const AiChat({super.key});
+
+  @override
+  AiChatState createState() => AiChatState();
+}
+
+class AiChatState extends State<AiChat> {
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +24,8 @@ class AiChat extends StatelessWidget {
         body: BlocBuilder<ChatBloc, ChatState>(
           builder: (context, state) {
             List<String> messages = [];
+            bool isUserMessage = false;
+
             if (state is ChatLoaded) {
               messages = state.messages;
             }
@@ -27,8 +36,30 @@ class AiChat extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(messages[index]),
+                      isUserMessage = index.isOdd;
+
+                      return Align(
+                        alignment: isUserMessage
+                            ? Alignment.centerLeft
+                            : Alignment.centerRight,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 4.0, horizontal: 8.0),
+                          padding: const EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            color: isUserMessage
+                                ? Colors.blue[100]
+                                : Colors.grey[300],
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Text(
+                            messages[index],
+                            style: TextStyle(
+                              color:
+                                  isUserMessage ? Colors.black : Colors.black87,
+                            ),
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -39,10 +70,13 @@ class AiChat extends StatelessWidget {
                     children: [
                       Expanded(
                         child: TextField(
+                          controller: _controller,
                           onSubmitted: (value) {
                             if (value.isNotEmpty) {
+                              logger.i('Updated Profile: $value');
                               BlocProvider.of<ChatBloc>(context)
                                   .add(SendMessage(value));
+                              _controller.clear();
                             }
                           },
                           decoration: const InputDecoration(
@@ -54,12 +88,11 @@ class AiChat extends StatelessWidget {
                       IconButton(
                         icon: const Icon(Icons.send),
                         onPressed: () {
-                          final controller = TextEditingController();
-                          final message = controller.text.trim();
+                          final message = _controller.text.trim();
                           if (message.isNotEmpty) {
                             BlocProvider.of<ChatBloc>(context)
                                 .add(SendMessage(message));
-                            controller.clear();
+                            _controller.clear();
                           }
                         },
                       ),

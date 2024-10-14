@@ -3,9 +3,6 @@ import '../models/user_profile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_event.dart';
-import 'package:logger/logger.dart';
-
-final logger = Logger();
 
 class EditProfileForm extends StatefulWidget {
   final UserProfile profile;
@@ -85,8 +82,6 @@ class EditProfileFormState extends State<EditProfileForm> {
                       lastName: lastName,
                       email: email,
                     );
-
-                    logger.i('Updated Profile: ${updatedProfile.toJson()}');
 
                     BlocProvider.of<ProfileBloc>(context)
                         .add(UpdateProfile(updatedProfile));

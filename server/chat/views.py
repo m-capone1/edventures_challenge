@@ -16,7 +16,7 @@ class ChatView(generics.CreateAPIView):
 
         if not user_message:
             return Response({"error": "Message is required"}, status=status.HTTP_400_BAD_REQUEST)
-        
+    
         api_key = os.environ.get("OPENAI_API_KEY")
         client = OpenAI(api_key=api_key)
 
@@ -27,7 +27,7 @@ class ChatView(generics.CreateAPIView):
                 messages=[
                     {
                         "role": "user",
-                        "content": "Say this is a test",
+                        "content": user_message,
                     }
                 ],
                 model="gpt-3.5-turbo",
