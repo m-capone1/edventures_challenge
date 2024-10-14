@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/user_profile.dart';
 
 class ProfileService {
-  final String url = "http://127.0.0.1:8000/api";
+  final String url = "https://edventures-challenge.onrender.com/api";
 
   Future<List<UserProfile>> fetchProfiles() async {
     final response = await http.get(Uri.parse('$url/user-profiles/'));

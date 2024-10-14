@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ChatService {
-  final String url = "http://127.0.0.1:8000/api/chat/";
+  final String url = "https://edventures-challenge.onrender.com/api/chat/";
 
   Future<String> sendMessage(String message) async {
     final response = await http.post(
