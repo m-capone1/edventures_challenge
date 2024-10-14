@@ -37,7 +37,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://edventures-challenge.onrender.com",
+    "https://edventures-challenge.web.app/",
 ]
 
 ROOT_URLCONF = 'server.urls'
