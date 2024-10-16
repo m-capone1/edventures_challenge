@@ -25,9 +25,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       try {
         await profileService.createProfile(event.profile);
 
-        // final updatedProfiles = await profileService.fetchProfiles();
-        // emit(ProfileLoaded(updatedProfiles));
-        add(LoadProfiles());
+        final updatedProfiles = await profileService.fetchProfiles();
+        emit(ProfileLoaded(updatedProfiles));
       } catch (e) {
         emit(ProfileError(e.toString()));
       }
@@ -38,8 +37,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       try {
         await profileService.updateProfile(event.profile);
 
-        //final updatedProfiles = await profileService.fetchProfiles();
-        add(LoadProfiles());
+        final updatedProfiles = await profileService.fetchProfiles();
+        emit(ProfileLoaded(updatedProfiles));
       } catch (e) {
         emit(ProfileError(e.toString()));
       }

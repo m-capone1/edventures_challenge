@@ -6,8 +6,7 @@ import 'package:logger/logger.dart';
 final logger = Logger();
 
 class ProfileService {
-  // final String url = "https://edventures-challenge.onrender.com/api";
-  final String url = "http://127.0.0.1:8000/api";
+  final String url = "https://edventures-challenge.onrender.com/api";
 
   Future<List<UserProfile>> fetchProfiles() async {
     final response = await http.get(Uri.parse('$url/user-profiles/'));
