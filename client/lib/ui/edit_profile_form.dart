@@ -85,7 +85,7 @@ class EditProfileFormState extends State<EditProfileForm> {
 
                     BlocProvider.of<ProfileBloc>(context)
                         .add(UpdateProfile(updatedProfile));
-                    Navigator.pop(context);
+                    Navigator.pop(context, true);
                   }
                 },
                 child: const Text('Update Profile'),

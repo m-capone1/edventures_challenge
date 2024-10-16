@@ -8,7 +8,8 @@ SECRET_KEY = 'django-insecure-&op_3rsq-x4+(q_@kz!59ej*olz9q1*uh9zj(e^dvovq@wh*!z
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'edventures-challenge.onrender.com'
+    # 'edventures-challenge.onrender.com',
+    '127.0.0.1',
 ]
 
 INSTALLED_APPS = [
@@ -37,7 +38,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://edventures-challenge.web.app/",
+    "https://edventures-challenge.web.app",
 ]
 
 ROOT_URLCONF = 'server.urls'

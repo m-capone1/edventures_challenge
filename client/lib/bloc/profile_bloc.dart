@@ -2,6 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../services/profile_services.dart';
 import 'profile_event.dart';
 import 'profile_state.dart';
+import 'package:logger/logger.dart';
+
+final logger = Logger();
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileService profileService;
@@ -18,21 +21,24 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     });
 
     on<CreateProfile>((event, emit) async {
-      if (state is ProfileLoaded) {
-        try {
-          emit(ProfileLoading());
-          await profileService.createProfile(event.profile);
-          add(LoadProfiles());
-        } catch (e) {
-          emit(ProfileError(e.toString()));
-        }
+      emit(ProfileLoading());
+      try {
+        await profileService.createProfile(event.profile);
+
+        // final updatedProfiles = await profileService.fetchProfiles();
+        // emit(ProfileLoaded(updatedProfiles));
+        add(LoadProfiles());
+      } catch (e) {
+        emit(ProfileError(e.toString()));
       }
     });
 
     on<UpdateProfile>((event, emit) async {
+      emit(ProfileLoading());
       try {
-        emit(ProfileLoading());
         await profileService.updateProfile(event.profile);
+
+        //final updatedProfiles = await profileService.fetchProfiles();
         add(LoadProfiles());
       } catch (e) {
         emit(ProfileError(e.toString()));

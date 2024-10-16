@@ -81,7 +81,7 @@ class CreateProfileFormState extends State<CreateProfileForm> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    final newProfile = UserProfile(
+                    UserProfile newProfile = UserProfile(
                       id: 0,
                       username: _usernameController.text,
                       email: _emailController.text,
@@ -92,7 +92,7 @@ class CreateProfileFormState extends State<CreateProfileForm> {
                     BlocProvider.of<ProfileBloc>(context)
                         .add(CreateProfile(newProfile));
 
-                    Navigator.pop(context);
+                    Navigator.pop(context, true);
                   }
                 },
                 child: const Text('Create Profile'),

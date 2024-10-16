@@ -8,8 +8,19 @@ import './create_profile_form.dart';
 import './edit_profile_form.dart';
 import './ai_chat.dart';
 
-class UserProfileScreen extends StatelessWidget {
+class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
+
+  @override
+  UserProfileScreenState createState() => UserProfileScreenState();
+}
+
+class UserProfileScreenState extends State<UserProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ProfileBloc>(context).add(LoadProfiles());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +46,15 @@ class UserProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 24),
                 child: IconButton(
                   icon: const Icon(Icons.add, color: Colors.black),
-                  onPressed: () {
-                    Navigator.push(
+                  onPressed: () async {
+                    await Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const CreateProfileForm()),
                     );
+                    if (mounted) {
+                      BlocProvider.of<ProfileBloc>(context).add(LoadProfiles());
+                    }
                   },
                 ),
               ),
@@ -61,18 +75,27 @@ class UserProfileScreen extends StatelessWidget {
                   final profile = state.profiles[index];
                   return ListTile(
                     title: Text(profile.username),
-                    subtitle: Text(profile.email),
+                    subtitle: Text(
+                        '${profile.firstName}, ${profile.lastName}, ${profile.email}'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
                           icon: const Icon(Icons.edit),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        EditProfileForm(profile: profile)));
+                          onPressed: () async {
+                            if (!mounted) return;
+
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    EditProfileForm(profile: profile),
+                              ),
+                            );
+                            if (mounted && result != null) {
+                              BlocProvider.of<ProfileBloc>(context)
+                                  .add(LoadProfiles());
+                            }
                           },
                         ),
                         IconButton(
