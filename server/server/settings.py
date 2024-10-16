@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-&op_3rsq-x4+(q_@kz!59ej*olz9q1*uh9zj(e^dvovq@wh*!z
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # 'edventures-challenge.onrender.com',
+    'edventures-challenge.onrender.com',
     '127.0.0.1',
 ]
 
